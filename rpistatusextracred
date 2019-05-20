@@ -1,0 +1,20 @@
+#!/bin/bash
+
+rpislist=("rpi01" "rpi02" "rpi03" "rpi04" "rpi05" "rpi06" "rpi07" "rpi08" "rpi09" "rpi10" "rpi11" "rpi12" "rpi13" "rpi14" "rpi15" "rpi16" "rpi17" "rpi18" "rpi19" "rpi20")
+
+if [ $# -gt  0 ] ; then
+unset rpislist
+rpislist+=( $* )
+fi
+
+for i in ${rpislist[@]}
+do
+
+        ping -c1 -w1 $i > /dev/null 2>&1
+        if [ $? -eq 0 ] ; then
+                echo $i "Alive"
+        else
+                echo $i "Dead"
+        fi
+done
+
